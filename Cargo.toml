@@ -8,7 +8,7 @@ homepage = "https://github.com/rikonaka/gcdx-rs"
 documentation = "https://docs.rs/gcdx"
 repository = "https://github.com/rikonaka/gcdx-rs"
 readme = "README.md"
-keywords = ["gcd", "greatest-common-divisor"]
+keywords = ["gcd"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
