@@ -54,7 +54,7 @@ where
     tmp
 }
 
-pub fn gcdx<T: Clone>(values: Vec<T>) -> Option<T>
+pub fn gcdx<T: Clone>(values: &[T]) -> Option<T>
 where
     T: Rem<Output = T> + PartialOrd + Zero + Copy + Display,
 {
@@ -82,27 +82,27 @@ mod tests {
     #[test]
     fn test_2() {
         let v = vec![10, 9, 8, 7];
-        let g = gcdx(v).unwrap();
+        let g = gcdx(&v).unwrap();
         println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![120, 168, 328, 624, 320];
-        let g = gcdx(v).unwrap();
+        let g = gcdx(&v).unwrap();
         println!("{}", g);
         assert_eq!(g, 8);
 
         let v: Vec<u32> = vec![1566429, 1566930, 1570805, 1563941, 1566387];
-        let g = gcdx(v).unwrap();
+        let g = gcdx(&v).unwrap();
         println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![1774071, 1360754, 1571542, 1830161, 1302721];
-        let g = gcdx(v).unwrap();
+        let g = gcdx(&v).unwrap();
         println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![2228668932, 825805579, 1955783521, 1173124319, 1234171242];
-        let g = gcdx(v).unwrap();
+        let g = gcdx(&v).unwrap();
         println!("{}", g);
         assert_eq!(g, 1);
     }
