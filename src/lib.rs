@@ -54,9 +54,9 @@ where
     tmp
 }
 
-pub fn gcdx<T: Clone>(values: &[T]) -> Option<T>
+pub fn gcdx<T>(values: &[T]) -> Option<T>
 where
-    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display,
+    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display + Clone,
 {
     if values.len() > 0 {
         let mut m = values[0];
@@ -74,13 +74,7 @@ where
 mod tests {
     use super::*;
     #[test]
-    fn test_1() {
-        let a = 10;
-        let b = 3;
-        println!("{}", a % b);
-    }
-    #[test]
-    fn test_2() {
+    fn run() {
         let v = vec![10, 9, 8, 7];
         let g = gcdx(&v).unwrap();
         println!("{}", g);
