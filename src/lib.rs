@@ -74,6 +74,16 @@ mod tests {
     use super::*;
     #[test]
     fn run() {
+        let v = vec![10];
+        let g = gcdx(&v).unwrap();
+        println!("{}", g);
+        assert_eq!(g, 10);
+
+        let v = vec![10, 9];
+        let g = gcdx(&v).unwrap();
+        println!("{}", g);
+        assert_eq!(g, 1);
+
         let v = vec![10, 9, 8, 7];
         let g = gcdx(&v).unwrap();
         println!("{}", g);
