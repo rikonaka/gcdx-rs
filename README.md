@@ -2,6 +2,8 @@
 
 Calculate the greatest common divisor of multiple values
 
+[![Rust](https://github.com/rikonaka/gcdx-rs/actions/workflows/rust.yml/badge.svg?branch=main)](https://github.com/rikonaka/gcdx-rs/actions/workflows/rust.yml)
+
 ## Example
 
 ```rust
