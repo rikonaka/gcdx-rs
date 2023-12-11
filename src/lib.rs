@@ -44,7 +44,6 @@ where
     let mut tmp = b;
     loop {
         let check = ac % bc;
-        // println!("{} {} {}", ac, bc, check);
         if check != T::ZERO {
             tmp = check;
             ac = bc;
@@ -64,7 +63,6 @@ where
         let mut m = values[0];
         for i in 1..values.len() {
             m = gcd(m, values[i]);
-            // println!("{}", m);
         }
         Some(m)
     } else {
@@ -79,37 +77,42 @@ mod tests {
     fn run() {
         let v = vec![10];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 10);
 
         let v = vec![10, 9];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 1);
 
         let v = vec![10, 9, 8, 7];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![120, 168, 328, 624, 320];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 8);
 
         let v: Vec<u32> = vec![1566429, 1566930, 1570805, 1563941, 1566387];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![1774071, 1360754, 1571542, 1830161, 1302721];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
         assert_eq!(g, 1);
 
         let v: Vec<u32> = vec![2228668932, 825805579, 1955783521, 1173124319, 1234171242];
         let g = gcdx(&v).unwrap();
-        println!("{}", g);
+        // println!("{}", g);
+        assert_eq!(g, 1);
+
+        let v: Vec<usize> = vec![2228668932, 825805579, 1955783521, 1173124319, 1234171242];
+        let g = gcdx(&v).unwrap();
+        // println!("{}", g);
         assert_eq!(g, 1);
     }
 }
