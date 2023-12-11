@@ -4,18 +4,6 @@ use std::ops::Rem;
 pub trait Zero {
     const ZERO: Self;
 }
-impl Zero for i8 {
-    const ZERO: Self = 0;
-}
-impl Zero for i16 {
-    const ZERO: Self = 0;
-}
-impl Zero for i32 {
-    const ZERO: Self = 0;
-}
-impl Zero for i128 {
-    const ZERO: Self = 0;
-}
 impl Zero for u8 {
     const ZERO: Self = 0;
 }
@@ -75,17 +63,17 @@ mod tests {
     use super::*;
     #[test]
     fn run() {
-        let v = vec![10];
+        let v: Vec<u8> = vec![10];
         let g = gcdx(&v).unwrap();
         // println!("{}", g);
         assert_eq!(g, 10);
 
-        let v = vec![10, 9];
+        let v: Vec<u16> = vec![10, 9];
         let g = gcdx(&v).unwrap();
         // println!("{}", g);
         assert_eq!(g, 1);
 
-        let v = vec![10, 9, 8, 7];
+        let v: Vec<u16> = vec![10, 9, 8, 7];
         let g = gcdx(&v).unwrap();
         // println!("{}", g);
         assert_eq!(g, 1);

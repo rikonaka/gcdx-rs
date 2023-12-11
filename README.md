@@ -10,7 +10,7 @@ Calculate the greatest common divisor of multiple values.
 use gcdx::gcdx;
 
 fn main() {
-    let v: Vec<i32> = vec![10, 9, 8, 7];
+    let v: Vec<usize> = vec![10, 9, 8, 7];
     let g = gcdx(&v).unwrap();
     println!("{}", g);
     assert_eq!(g, 1);
