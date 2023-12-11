@@ -39,20 +39,20 @@ fn gcd<T>(a: T, b: T) -> T
 where
     T: Rem<Output = T> + PartialOrd + Zero + Copy + Display,
 {
-    let mut ac = a;
-    let mut bc = b;
-    let mut tmp = b;
+    let mut ax = a;
+    let mut bx = b;
+    let mut tx = b;
     loop {
-        let check = ac % bc;
+        let check = ax % bx;
         if check != T::ZERO {
-            tmp = check;
-            ac = bc;
-            bc = tmp;
+            tx = check;
+            ax = bx;
+            bx = tx;
         } else {
             break;
         }
     }
-    tmp
+    tx
 }
 
 pub fn gcdx<T>(values: &[T]) -> Option<T>
