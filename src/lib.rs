@@ -31,6 +31,9 @@ impl Zero for u64 {
 impl Zero for u128 {
     const ZERO: Self = 0;
 }
+impl Zero for usize {
+    const ZERO: Self = 0;
+}
 
 fn gcd<T>(a: T, b: T) -> T
 where
