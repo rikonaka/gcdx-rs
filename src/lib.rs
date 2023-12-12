@@ -43,16 +43,32 @@ where
     tx
 }
 
+fn zero_check<T>(values: &[T]) -> bool
+where
+    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display + Clone,
+{
+    for v in values {
+        if *v == T::ZERO {
+            return true;
+        }
+    }
+    false
+}
+
 pub fn gcdx<T>(values: &[T]) -> Option<T>
 where
     T: Rem<Output = T> + PartialOrd + Zero + Copy + Display + Clone,
 {
     if values.len() > 0 {
-        let mut m = values[0];
-        for i in 1..values.len() {
-            m = gcd(m, values[i]);
+        if zero_check(values) {
+            return Some(T::ZERO);
+        } else {
+            let mut m = values[0];
+            for i in 1..values.len() {
+                m = gcd(m, values[i]);
+            }
+            Some(m)
         }
-        Some(m)
     } else {
         None
     }
@@ -63,6 +79,11 @@ mod tests {
     use super::*;
     #[test]
     fn run() {
+        let v: Vec<u8> = vec![0, 1, 2, 3, 4];
+        let g = gcdx(&v).unwrap();
+        // println!("{}", g);
+        assert_eq!(g, 0);
+
         let v: Vec<u8> = vec![10];
         let g = gcdx(&v).unwrap();
         // println!("{}", g);
