@@ -1,77 +1,71 @@
-pub fn gcd_euclidean(a: usize, b: usize) -> usize {
-    let mut a = a;
-    let mut b = b;
-    let mut t = b;
+use std::fmt::Display;
+use std::ops::Rem;
+
+pub trait Zero {
+    const ZERO: Self;
+}
+impl Zero for u8 {
+    const ZERO: Self = 0;
+}
+impl Zero for u16 {
+    const ZERO: Self = 0;
+}
+impl Zero for u32 {
+    const ZERO: Self = 0;
+}
+impl Zero for u64 {
+    const ZERO: Self = 0;
+}
+impl Zero for u128 {
+    const ZERO: Self = 0;
+}
+impl Zero for usize {
+    const ZERO: Self = 0;
+}
+
+pub fn gcd<T>(a: T, b: T) -> T
+where
+    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display,
+{
+    let mut ax = a;
+    let mut bx = b;
+    let mut tx = b;
     loop {
-        let check = a % b;
-        if check != 0 {
-            t = check;
-            a = b;
-            b = t;
+        let check = ax % bx;
+        if check != T::ZERO {
+            tx = check;
+            ax = bx;
+            bx = tx;
         } else {
             break;
         }
     }
-    t
+    tx
 }
 
-pub fn gcd_stein(a: usize, b: usize) -> usize {
-    let mut a = a;
-    let mut b = b;
-
-    let shift = (a | b).trailing_zeros();
-
-    a >>= a.trailing_zeros();
-    b >>= b.trailing_zeros();
-
-    while a != b {
-        if a > b {
-            a -= b;
-            a >>= a.trailing_zeros();
-        } else {
-            b -= a;
-            b >>= b.trailing_zeros();
+fn array_zero_check<T>(array: &[T]) -> bool
+where
+    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display + Clone,
+{
+    for v in array {
+        if *v == T::ZERO {
+            return true;
         }
     }
-
-    a << shift
+    false
 }
 
-pub fn gcd_recursion(a: usize, b: usize) -> usize {
-    if b == 0 {
-        a
-    } else {
-        gcd_recursion(b, a % b)
-    }
-}
-
-pub enum GCDMethods {
-    Euclidean,
-    Stein,
-    Recursion,
-}
-
-pub fn gcd_multiple(array: &[usize], method: GCDMethods) -> Option<usize> {
-    let zero_check = |inputs: &[usize]| -> bool {
-        for v in inputs {
-            if *v == 0 {
-                return true;
-            }
-        }
-        false
-    };
-
+pub fn gcdx<T>(array: &[T]) -> Option<T>
+where
+    T: Rem<Output = T> + PartialOrd + Zero + Copy + Display + Clone,
+{
     if array.len() > 0 {
-        if zero_check(array) {
-            Some(0)
+        if array_zero_check(array) {
+            return Some(T::ZERO);
         } else {
             let mut m = array[0];
             for i in 1..array.len() {
-                m = match method {
-                    GCDMethods::Euclidean => gcd_euclidean(m, array[i]),
-                    GCDMethods::Stein => gcd_stein(m, array[i]),
-                    GCDMethods::Recursion => gcd_recursion(m, array[i]),
-                };
+                m = gcd(m, array[i]);
             }
             Some(m)
         }
@@ -80,73 +74,33 @@ pub fn gcd_multiple(array: &[usize], method: GCDMethods) -> Option<usize> {
     }
 }
 
-/// Calculate the greatest common divisor using the Stein method.
-pub fn gcdx_stein(array: &[usize]) -> Option<usize> {
-    gcd_multiple(array, GCDMethods::Stein)
-}
-
-/// Calculate the greatest common divisor using the Euclidean method.
-pub fn gcdx_euclidean(array: &[usize]) -> Option<usize> {
-    gcd_multiple(array, GCDMethods::Euclidean)
-}
-
-/// Calculate the greatest common divisor using the Recursion method.
-pub fn gcdx_recursion(array: &[usize]) -> Option<usize> {
-    gcd_multiple(array, GCDMethods::Recursion)
-}
-
-/// Calculate the greatest common divisor using the Euclidean method.
-pub fn gcdx(array: &[usize]) -> Option<usize> {
-    gcd_multiple(array, GCDMethods::Euclidean)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
     #[test]
-    fn test_gcdx_recursion() {
+    fn test_gcdx() {
         let v: Vec<usize> = vec![0, 1, 2, 3, 4];
-        let g = gcdx_recursion(&v).unwrap();
-        assert_eq!(g, 0);
-
-        let v: Vec<usize> = vec![120, 168, 328, 624, 320];
-        let g = gcdx_recursion(&v).unwrap();
-        assert_eq!(g, 8);
-    }
-    #[test]
-    fn test_gcdx_stein() {
-        let v: Vec<usize> = vec![0, 1, 2, 3, 4];
-        let g = gcdx_stein(&v).unwrap();
-        assert_eq!(g, 0);
-
-        let v: Vec<usize> = vec![120, 168, 328, 624, 320];
-        let g = gcdx_stein(&v).unwrap();
-        assert_eq!(g, 8);
-    }
-    #[test]
-    fn test_gcdx_euclidean() {
-        let v: Vec<usize> = vec![0, 1, 2, 3, 4];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 0);
 
         let v: Vec<usize> = vec![10];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 10);
 
         let v: Vec<usize> = vec![10, 9];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 1);
 
         let v: Vec<usize> = vec![10, 9, 8, 7];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 1);
 
         let v: Vec<usize> = vec![120, 168, 328, 624, 320];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 8);
 
         let v: Vec<usize> = vec![2228668932, 825805579, 1955783521, 1173124319, 1234171242];
-        let g = gcdx_euclidean(&v).unwrap();
+        let g = gcdx(&v).unwrap();
         assert_eq!(g, 1);
     }
 }
