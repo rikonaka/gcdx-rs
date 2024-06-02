@@ -95,6 +95,11 @@ pub fn gcdx_recursion(array: &[usize]) -> Option<usize> {
     gcd_multiple(array, GCDMethods::Recursion)
 }
 
+/// Calculate the greatest common divisor using the Euclidean method.
+pub fn gcdx(array: &[usize]) -> Option<usize> {
+    gcd_multiple(array, GCDMethods::Euclidean)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
