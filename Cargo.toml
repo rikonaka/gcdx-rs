@@ -1,6 +1,6 @@
 [package]
 name = "gcdx"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "MIT"
 description = "Calculate the greatest common divisor of multiple values"

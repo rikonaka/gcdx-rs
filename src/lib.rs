@@ -1,4 +1,4 @@
-fn gcd_euclidean(a: usize, b: usize) -> usize {
+pub fn gcd_euclidean(a: usize, b: usize) -> usize {
     let mut ax = a;
     let mut bx = b;
     let mut tx = b;
@@ -15,7 +15,7 @@ fn gcd_euclidean(a: usize, b: usize) -> usize {
     tx
 }
 
-fn gcd_stein(a: usize, b: usize) -> usize {
+pub fn gcd_stein(a: usize, b: usize) -> usize {
     let mut a = a;
     let mut b = b;
 
@@ -37,7 +37,7 @@ fn gcd_stein(a: usize, b: usize) -> usize {
     a << shift
 }
 
-fn gcd_recursion(a: usize, b: usize) -> usize {
+pub fn gcd_recursion(a: usize, b: usize) -> usize {
     if b == 0 {
         a
     } else {
@@ -45,13 +45,13 @@ fn gcd_recursion(a: usize, b: usize) -> usize {
     }
 }
 
-enum GCDMethods {
+pub enum GCDMethods {
     Euclidean,
     Stein,
     Recursion,
 }
 
-fn gcd_multiple(array: &[usize], method: GCDMethods) -> Option<usize> {
+pub fn gcd_multiple(array: &[usize], method: GCDMethods) -> Option<usize> {
     let zero_check = |inputs: &[usize]| -> bool {
         for v in inputs {
             if *v == 0 {
