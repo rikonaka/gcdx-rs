@@ -7,7 +7,7 @@ Calculate the greatest common divisor of multiple values.
 ## Example
 
 ```rust
-use gcdx::gcdx;
+use gcdx::gcdx_euclidean;
 
 fn main() {
     let v = vec![10, 9, 8, 7];
