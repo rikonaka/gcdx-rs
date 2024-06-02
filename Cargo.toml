@@ -1,6 +1,6 @@
 [package]
 name = "gcdx"
-version = "0.1.8"
+version = "0.1.9"
 edition = "2021"
 license = "MIT"
 description = "Calculate the greatest common divisor of multiple values"
@@ -8,7 +8,7 @@ homepage = "https://github.com/rikonaka/gcdx-rs"
 documentation = "https://docs.rs/gcdx"
 repository = "https://github.com/rikonaka/gcdx-rs"
 readme = "README.md"
-keywords = ["gcd"]
+keywords = ["gcd", "greatest common divisor"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
