@@ -7,11 +7,11 @@ Calculate the greatest common divisor of multiple values.
 ## Example
 
 ```rust
-use gcdx::gcdx_euclidean;
+use gcdx::gcdx;
 
 fn main() {
     let v = vec![10, 9, 8, 7];
-    let g = gcdx_euclidean(&v).unwrap();
+    let g = gcdx(&v).unwrap();
     println!("{}", g);
     assert_eq!(g, 1);
 }
