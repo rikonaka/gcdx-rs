@@ -1,18 +1,18 @@
 pub fn gcd_euclidean(a: usize, b: usize) -> usize {
-    let mut ax = a;
-    let mut bx = b;
-    let mut tx = b;
+    let mut a = a;
+    let mut b = b;
+    let mut t = b;
     loop {
-        let check = ax % bx;
+        let check = a % b;
         if check != 0 {
-            tx = check;
-            ax = bx;
-            bx = tx;
+            t = check;
+            a = b;
+            b = t;
         } else {
             break;
         }
     }
-    tx
+    t
 }
 
 pub fn gcd_stein(a: usize, b: usize) -> usize {
